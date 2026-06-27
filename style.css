@@ -1,0 +1,55 @@
+/* Style.css - styling dashboard Prediksi ISPU DKI Jakarta */
+
+.card-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #1E3A8A;
+    text-transform: uppercase;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: rgb(114, 80, 80);
+}
+
+.dominant-pollutant {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1E3A8A;
+    margin: 0.2rem 0;
+}
+
+.section-label {
+    font-size: 0.85rem;
+    color: #64748B;
+}
+
+/* ============================================================
+   SIDEBAR - Biru Dongker
+   ============================================================ */
+[data-testid="stSidebar"] {
+    background-color: #0A192F !important;
+}
+
+/* Pastikan semua teks di sidebar berwarna putih agar kontras */
+[data-testid="stSidebar"] * {
+    color: #FFFFFF !important;
+}
+
+/* Efek hover untuk menu navigasi di background gelap */
+[data-testid="stSidebarNav"] a:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    text-decoration: none !important;
+}
+
+/* Warna menu saat aktif */
+[data-testid="stSidebarNav"] a[aria-current="page"] {
+    background-color: #1B52F2 !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+}
