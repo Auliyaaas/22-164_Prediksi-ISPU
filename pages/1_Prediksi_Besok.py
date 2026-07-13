@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import plotly.graph_objects as go
-import tensorflow as tf
+# import tensorflow as tf
 from datetime import datetime, timedelta
 
 from app import (
@@ -32,12 +32,12 @@ load_css()
 # ============================================================
 # LOAD MODEL & ASET (cached supaya tidak reload tiap interaksi)
 # ============================================================
-@st.cache_resource
-def load_model():
-    return tf.keras.models.load_model(
-        "model/model_hampel_22.keras",
-        compile=False
-    )
+# @st.cache_resource
+# def load_model():
+#     return tf.keras.models.load_model(
+#         "model/model_hampel_22.keras",
+#         compile=False
+#     )
 
 
 @st.cache_resource
@@ -47,7 +47,7 @@ def load_pickle_file(path):
 
 
 try:
-    model = load_model()
+    # model = load_model()
     min_vals_hampel = load_pickle_file("data/min_vals_hampel.pkl")   # dict {nama_fitur: nilai_min}
     max_vals_hampel = load_pickle_file("data/max_vals_hampel.pkl")   # dict {nama_fitur: nilai_max}
     features = load_pickle_file("data/features.pkl")                  # list nama fitur, urutan sesuai training
@@ -71,6 +71,13 @@ else:
 # (karena min_vals_hampel & max_vals_hampel aslinya dictionary, bukan array)
 min_vals = np.array([min_vals_hampel[f] for f in features], dtype=float)
 max_vals = np.array([max_vals_hampel[f] for f in features], dtype=float)
+
+st.success("✅ Dashboard berhasil dibuka tanpa TensorFlow")
+
+st.write("Features:", features)
+st.write("Shape:", last_7_days_norm.shape)
+
+st.stop()
 
 # ============================================================
 # PREDIKSI -- IDENTIK DENGAN KODE COLAB (TANPA NORMALISASI ULANG)
