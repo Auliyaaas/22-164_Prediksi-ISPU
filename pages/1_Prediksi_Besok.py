@@ -34,9 +34,10 @@ load_css()
 # ============================================================
 @st.cache_resource
 def load_model():
-    # compile=False -- kita hanya butuh predict(), bukan training ulang,
-    # jadi tidak perlu deserialisasi optimizer/loss/metrics
-    return tf.keras.models.load_model("model/model_hampel_19.h5", compile=False)
+    return tf.keras.models.load_model(
+        "model/model_hampel_22.keras",
+        compile=False
+    )
 
 
 @st.cache_resource
