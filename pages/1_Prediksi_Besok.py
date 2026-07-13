@@ -14,11 +14,6 @@ import pandas as pd
 import pickle
 import plotly.graph_objects as go
 import tensorflow as tf
-
-st.success("✅ TensorFlow berhasil diimport")
-st.write("TensorFlow Version:", tf.__version__)
-
-st.stop()
 from datetime import datetime, timedelta
 
 from app import (
@@ -37,12 +32,23 @@ load_css()
 # ============================================================
 # LOAD MODEL & ASET (cached supaya tidak reload tiap interaksi)
 # ============================================================
-# @st.cache_resource
-# def load_model():
-#     return tf.keras.models.load_model(
-#         "model/model_hampel_22.keras",
-#         compile=False
-#     )
+@st.cache_resource
+def load_model():
+    import os
+
+    model_path = "model/model_hampel_22.keras"
+
+    st.write("Model exists:", os.path.exists(model_path))
+
+    if os.path.exists(model_path):
+        st.write("Size:", os.path.getsize(model_path), "bytes")
+
+    st.stop()
+
+    return tf.keras.models.load_model(
+        model_path,
+        compile=False
+    )
 
 
 @st.cache_resource
