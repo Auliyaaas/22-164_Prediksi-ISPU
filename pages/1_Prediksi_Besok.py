@@ -5,7 +5,6 @@ tabel konsentrasi polutan, tren 7 hari, dan ringkasan prediksi.
 """
 
 import sys
-import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import streamlit as st
@@ -14,6 +13,7 @@ import pandas as pd
 import pickle
 import plotly.graph_objects as go
 import tensorflow as tf
+import streamlit as st
 from datetime import datetime, timedelta
 
 from app import (
@@ -32,21 +32,11 @@ load_css()
 # ============================================================
 # LOAD MODEL & ASET (cached supaya tidak reload tiap interaksi)
 # ============================================================
+
 @st.cache_resource
 def load_model():
-    import os
-
-    model_path = "model/model_hampel_22.keras"
-
-    st.write("Model exists:", os.path.exists(model_path))
-
-    if os.path.exists(model_path):
-        st.write("Size:", os.path.getsize(model_path), "bytes")
-
-    st.stop()
-
     return tf.keras.models.load_model(
-        model_path,
+        "model/model_hampel_22.keras",
         compile=False
     )
 
@@ -58,7 +48,7 @@ def load_pickle_file(path):
 
 
 try:
-    load_model()
+    model = load_model()
     min_vals_hampel = load_pickle_file("data/min_vals_hampel.pkl")   # dict {nama_fitur: nilai_min}
     max_vals_hampel = load_pickle_file("data/max_vals_hampel.pkl")   # dict {nama_fitur: nilai_max}
     features = load_pickle_file("data/features.pkl")                  # list nama fitur, urutan sesuai training
