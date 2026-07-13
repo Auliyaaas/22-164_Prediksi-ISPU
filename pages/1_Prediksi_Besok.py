@@ -13,7 +13,12 @@ import numpy as np
 import pandas as pd
 import pickle
 import plotly.graph_objects as go
-# import tensorflow as tf
+import tensorflow as tf
+
+st.success("✅ TensorFlow berhasil diimport")
+st.write("TensorFlow Version:", tf.__version__)
+
+st.stop()
 from datetime import datetime, timedelta
 
 from app import (
